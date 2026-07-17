@@ -1,0 +1,6 @@
+{
+  "name": "Atom",
+  "description": "A comprehensive professional cryptocurrency investment platform under the Atom digital ecosystem with real-time price updates, customizable VIP tiers, secure mock local storage wallet, transfer logs, and interactive AI-powered live support.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
