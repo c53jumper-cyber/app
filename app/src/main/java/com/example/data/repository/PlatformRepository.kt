@@ -143,6 +143,13 @@ class PlatformRepository(context: Context) {
             username = user.username
         )
         dao.insertTransaction(tx)
+        
+        // Online Sync
+        try {
+            api.addTransaction(tx)
+            api.updateUser(updatedUser)
+        } catch (e: Exception) {}
+
         onlineDbManager.syncUserToFirebase(updatedUser)
         onlineDbManager.syncTransactionToFirebase(tx)
     }
@@ -170,6 +177,13 @@ class PlatformRepository(context: Context) {
             username = user.username
         )
         dao.insertTransaction(tx)
+
+        // Online Sync
+        try {
+            api.addTransaction(tx)
+            api.updateUser(updatedUser)
+        } catch (e: Exception) {}
+
         onlineDbManager.syncUserToFirebase(updatedUser)
         onlineDbManager.syncTransactionToFirebase(tx)
         return WithdrawResult.SUCCESS
@@ -359,6 +373,13 @@ class PlatformRepository(context: Context) {
         )
         dao.insertTransaction(tx)
 
+        // Online Sync
+        try {
+            api.addInvestment(inv)
+            api.addTransaction(tx)
+            api.updateUser(updatedUser)
+        } catch (e: Exception) {}
+
         onlineDbManager.syncUserToFirebase(updatedUser)
         onlineDbManager.syncInvestmentToFirebase(inv)
         onlineDbManager.syncTransactionToFirebase(tx)
@@ -389,6 +410,12 @@ class PlatformRepository(context: Context) {
             isIpSuspicious = isIpSuspicious
         )
         dao.updateUser(updatedUser)
+
+        // Online Sync
+        try {
+            api.updateUser(updatedUser)
+        } catch (e: Exception) {}
+
         onlineDbManager.syncUserToFirebase(updatedUser)
     }
 
@@ -399,6 +426,12 @@ class PlatformRepository(context: Context) {
             isGoogleVerified = true
         )
         dao.updateUser(updatedUser)
+
+        // Online Sync
+        try {
+            api.updateUser(updatedUser)
+        } catch (e: Exception) {}
+
         onlineDbManager.syncUserToFirebase(updatedUser)
     }
 
@@ -407,6 +440,12 @@ class PlatformRepository(context: Context) {
         if (user.invitationCode.isNotEmpty() && user.invitationCode != "None" && user.invitationCode != "N/A") return false 
         val updatedUser = user.copy(invitationCode = inviteCode)
         dao.updateUser(updatedUser)
+
+        // Online Sync
+        try {
+            api.updateUser(updatedUser)
+        } catch (e: Exception) {}
+
         onlineDbManager.syncUserToFirebase(updatedUser)
         return true
     }
@@ -451,6 +490,12 @@ class PlatformRepository(context: Context) {
             timestamp = System.currentTimeMillis()
         )
         dao.insertMessage(msg)
+
+        // Online Sync
+        try {
+            api.sendMessage(msg)
+        } catch (e: Exception) {}
+
         onlineDbManager.syncMessageToFirebase(msg)
     }
 
