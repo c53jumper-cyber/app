@@ -93,7 +93,7 @@ class OnlineDatabaseManager(private val context: Context) {
                     Log.e("OnlineDatabaseManager", "Firebase services init failed", e)
                     _syncStatus.value = _syncStatus.value.copy(
                         isFirebaseConfigured = false,
-                        connectionMessage = "خطا در دسترسی به سرویس‌های گوگل: ${e.localizedMessage}"
+                        connectionMessage = "سرویس ابری گوگل (Firebase) غیرفعال است. جهت فعال‌سازی فایل google-services.json را بارگذاری کنید."
                     )
                 }
             } else {
@@ -107,9 +107,10 @@ class OnlineDatabaseManager(private val context: Context) {
             Log.e("OnlineDatabaseManager", "Firebase init error", e)
             _syncStatus.value = _syncStatus.value.copy(
                 isFirebaseConfigured = false,
-                isFirebaseSyncEnabled = false
+                isFirebaseSyncEnabled = false,
+                connectionMessage = "سرویس‌های گوگل موقتاً در دسترس نیستند."
             )
-            addLog("خطا در راه‌اندازی فایربیس: ${e.localizedMessage}")
+            addLog("سرویس گوگل (Firebase) آماده نیست.")
         }
     }
 
