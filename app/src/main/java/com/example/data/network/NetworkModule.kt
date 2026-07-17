@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit
 
 object NetworkModule {
     // IMPORTANT: User must replace this with their actual host URL
-    private const val BASE_URL = "https://your-host.com/api/"
+    private const val BASE_URL = "http://8par.ir/appol/"
 
     private val moshi = Moshi.Builder()
         .add(KotlinJsonAdapterFactory())
